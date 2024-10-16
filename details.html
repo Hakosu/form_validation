@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSVP Confirmation</title>
+    <style>
+        img {
+            float: left;
+        }
+        .couple-image {
+            width: auto;
+            height: 250px;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: 45%;
+        }
+        .confirmation-card {
+            align-items: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        #confettiCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        p{
+            margin: 10px 0;
+            font-size: 18px;
+            text-align: center;
+        }
+   
+    </style>
+</head>
+<body>
+    <div class="confirmation-card">
+        <h2>Thank you for your RSVP. Here is your confirmation card</h2>
+        <div class="details">
+            <img src="/Form Validation/mr and mrs.jpg" alt="Mr. and Mrs. Bumble" class="couple-image">
+            <p>Full Name: <span id="fullNameDisplay"></span></p>
+            <p>Phone Number: <span id="phoneNumberDisplay"></span></p>
+            <p>Email: <span id="emailDisplay"></span></p>
+            <p>Number of Attendees: <span id="attendeesDisplay"></span></p>
+            <p>Arrival Time: <span id="arrivalTimeDisplay"></span></p>
+            <p>Menu Preference: <span id="menuPreferenceDisplay"></span></p>
+            <p>Table Option: <span id="tableOptionDisplay"></span></p>
+        </div>
+    </div>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confettiCanvas"></canvas>
+
+    <!-- Confetti JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+
+    <!-- Internal JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Details page script running');
+
+            // Get data from localStorage
+            const fullName = localStorage.getItem('fullName');
+            const phoneNumber = localStorage.getItem('phoneNumber');
+            const email = localStorage.getItem('email');
+            const attendees = localStorage.getItem('attendees');
+            const arrivalTime = localStorage.getItem('arrivalTime');
+            const menuPreference = localStorage.getItem('menuPreference');
+            const tableOption = localStorage.getItem('tableOption');
+
+            console.log('Retrieved Data:', {
+                fullName,
+                phoneNumber,
+                email,
+                attendees,
+                arrivalTime,
+                menuPreference,
+                tableOption
+            });
+
+            // Populate the confirmation details
+            document.getElementById('fullNameDisplay').textContent = fullName || 'Not Provided';
+            document.getElementById('phoneNumberDisplay').textContent = phoneNumber || 'Not Provided';
+            document.getElementById('emailDisplay').textContent = email || 'Not Provided';
+            document.getElementById('attendeesDisplay').textContent = attendees || 'Not Provided';
+            document.getElementById('arrivalTimeDisplay').textContent = arrivalTime || 'Not Provided';
+            document.getElementById('menuPreferenceDisplay').textContent = menuPreference || 'Not Provided';
+            document.getElementById('tableOptionDisplay').textContent = tableOption || 'Not Provided';
+
+            // Confetti burst function
+            function burstConfetti() {
+                confetti({
+                    particleCount: 100,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#ff0', '#0f0', '#00f']
+                });
+                confetti({
+                    particleCount: 100,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#ff0', '#0f0', '#00f']
+                });
+            }
+
+            // Start confetti on page load
+            function startConfetti() {
+                burstConfetti();
+                setInterval(burstConfetti, 3000); // Repeat every 3 seconds
+            }
+
+            startConfetti();
+        });
+    </script>
+</body>
+</html>

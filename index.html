@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f7f7f7;
+        }
+        h2 {
+            font-size: 25px;
+            text-align: center;
+            color: #000000;
+        }
+        form {
+            max-width: 500px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: rgb(228, 88, 88);
+            color: whitesmoke;
+            border: none;
+            cursor: pointer;
+        }
+        form button:focus {
+            outline: none;
+        }
+        form button:hover {
+            background-color: #62be90;
+        }
+        form input:focus {
+            outline: none;
+            border-color: var(--text-color);
+        }
+        footer {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <form action="" id="signUpForm">
+        <h2>Bumble's Family 25<sup>th</sup> Anniversary Invitation</h2>
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" required>
+
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" id="phoneNumber" pattern="\d{10}" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+
+        <label for="attendees">Number of attendees:</label>
+        <input type="number" id="attendees" required min="4" max="15">
+
+        <label for="time">Arrival Time:</label>
+        <input type="time" id="time" required>
+
+        <label for="menuPreference">Menu Preference:</label>
+        <select id="menuPreference" required>
+            <option value="vegan">Vegan</option>
+            <option value="raw food">Raw Food</option>
+            <option value="keto">Keto</option>
+            <option value="plant based">Plant Based</option>
+            <option value="lactose intolerant">Lactose Intolerant</option>
+        </select>
+
+        <label for="tableOption">Select Table Option:</label>
+        <select id="tableOption" required>
+            <option value="table 1">Table 1</option>
+            <option value="table 2">Table 2</option>
+            <option value="table 3">Table 3</option>
+            <option value="table 4">Table 4</option>
+        </select>
+
+        <button type="submit">Submit</button>
+    </form>
+    <footer>Developed by Novithan Naidoo</footer>
+
+    <script>
+        document.getElementById('signUpForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form submission
+            
+            // Get form data
+            const fullName = document.getElementById('fullName').value;
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const email = document.getElementById('email').value;
+            const attendees = document.getElementById('attendees').value;
+            const arrivalTime = document.getElementById('time').value;
+            const menuPreference = document.getElementById('menuPreference').value;
+            const tableOption = document.getElementById('tableOption').value;
+
+            // Validate phone number
+            const phoneRegex = /^\d{10}$/;
+            if (!phoneRegex.test(phoneNumber)) {
+                alert('Please enter a valid 10-digit phone number.');
+                return;
+            }
+
+            // Store data in localStorage
+            localStorage.setItem('fullName', fullName);
+            localStorage.setItem('phoneNumber', phoneNumber);
+            localStorage.setItem('email', email);
+            localStorage.setItem('attendees', attendees);
+            localStorage.setItem('arrivalTime', arrivalTime);
+            localStorage.setItem('menuPreference', menuPreference);
+            localStorage.setItem('tableOption', tableOption);
+
+            // Redirect to the details page
+            window.location.href = 'details.html';
+        });
+    </script>
+</body>
+</html>
